@@ -30,8 +30,14 @@ var searchYouTube = (options, callback = () => {}) => {
 
 
   const settings = {
+    method: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
     dataType: 'json',
+    dataFilter: (data, dataType) => {
+      const responseObj = JSON.parse(data);
+      const items = responseObj.items;
+      return JSON.stringify(items);
+    },
     data: {
       maxResults: options.max || 5,
       key: options.key || YOUTUBE_API_KEY,
@@ -44,7 +50,7 @@ var searchYouTube = (options, callback = () => {}) => {
     error: (data) => { console.log(data); },
   };
 
-  $.get(settings);
+  $.ajax(settings);
 };
 
 export default searchYouTube;
