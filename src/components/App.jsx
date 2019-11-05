@@ -13,12 +13,12 @@ class App extends React.Component {
 
   }
 
-  onVideoTitleClick (event) {
-    event.preventDefault();
-    const videoId = event.target.id;
-    const video = exampleVideoData.filter((video) => {
-      return video.id.videoId === videoId;
-    })[0];
+  onVideoTitleClick (video) {
+    // event.preventDefault();
+    // const videoId = event.target.id;
+    // const video = exampleVideoData.filter((video) => {
+    //   return video.id.videoId === videoId;
+    // })[0];
     this.setState({
       currentVideo: video,
     });
