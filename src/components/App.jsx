@@ -9,6 +9,19 @@ class App extends React.Component {
       videoList: exampleVideoData,
       currentVideo: exampleVideoData[0]
     };
+    this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
+
+  }
+
+  onVideoTitleClick (event) {
+    event.preventDefault();
+    const videoId = event.target.id;
+    const video = exampleVideoData.filter((video) => {
+      return video.id.videoId === videoId;
+    })[0];
+    this.setState({
+      currentVideo: video,
+    });
   }
 
   render () {
@@ -24,7 +37,7 @@ class App extends React.Component {
             <div><h5><em>videoPlayer</em></h5><VideoPlayer video={this.state.currentVideo} /></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em></h5><VideoList videos={this.state.videoList}/></div>
+            <div><h5><em>videoList</em></h5><VideoList videos={this.state.videoList} onVideoTitleClick={this.onVideoTitleClick}/></div>
           </div>
         </div>
       </div>
