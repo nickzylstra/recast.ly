@@ -1,6 +1,7 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '../data/exampleVideoData.js';
+import searchYouTube from '../lib/searchYouTube.js';
 
 class App extends React.Component {
   constructor () {
@@ -10,6 +11,10 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
+    searchYouTube({
+      query: '',
+      max: 10,
+    });
 
   }
 
