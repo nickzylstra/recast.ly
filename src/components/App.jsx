@@ -11,10 +11,10 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0]
     };
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
-    searchYouTube({
-      query: '',
-      max: 10,
-    });
+    // searchYouTube({
+    //   query: '',
+    //   max: 10,
+    // });
 
   }
 
