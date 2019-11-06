@@ -18,7 +18,6 @@ class App extends React.Component {
 
   componentDidMount () {
     this.searchYouTube({}, ((videoList) => {
-      // debugger;
       this.setState({
         videoList: videoList,
         currentVideo: videoList[0],
@@ -27,7 +26,12 @@ class App extends React.Component {
   }
 
   onSearchInput (searchStr) {
-    this.debouncedSearch({query: searchStr});
+    this.debouncedSearch({query: searchStr}, ((videoList) => {
+      this.setState({
+        videoList: videoList,
+        currentVideo: videoList[0],
+      });
+    }).bind(this));
   }
 
   onVideoTitleClick (video) {
