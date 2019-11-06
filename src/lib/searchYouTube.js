@@ -47,7 +47,10 @@ var searchYouTube = (options, callback = () => {}) => {
       videoEmbeddable: true,
     },
     success: callback,
-    error: (data) => { console.log(data); },
+    error: (data) => {
+      console.log('youtube get request failed');
+      console.log(data);
+    },
   };
 
   $.ajax(settings);
