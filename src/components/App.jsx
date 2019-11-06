@@ -1,6 +1,7 @@
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '../data/exampleVideoData.js';
+import Search from './Search.js';
 
 class App extends React.Component {
   constructor (props) {
@@ -11,6 +12,8 @@ class App extends React.Component {
     };
     this.searchYouTube = props.searchYouTube;
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
+    this.onSearchInput = this.onSearchInput.bind(this);
+    this.debouncedSearch = _.debounce(props.searchYouTube, 500, {trailing: true});
   }
 
   componentDidMount () {
@@ -21,6 +24,10 @@ class App extends React.Component {
         currentVideo: videoList[0],
       });
     }).bind(this));
+  }
+
+  onSearchInput (searchStr) {
+    this.debouncedSearch({query: searchStr});
   }
 
   onVideoTitleClick (video) {
@@ -39,15 +46,15 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div><h5><em>search</em><Search onSearchInput={this.onSearchInput}/></h5></div>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><em>videoPlayer</em></h5><VideoPlayer video={this.state.currentVideo} /></div>
+            <div><h5><em>videoPlayer</em><VideoPlayer video={this.state.currentVideo} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em></h5><VideoList videos={this.state.videoList} onVideoTitleClick={this.onVideoTitleClick}/></div>
+            <div><h5><em>videoList</em><VideoList videos={this.state.videoList} onVideoTitleClick={this.onVideoTitleClick}/></h5></div>
           </div>
         </div>
       </div>
