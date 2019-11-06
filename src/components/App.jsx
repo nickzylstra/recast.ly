@@ -14,24 +14,22 @@ class App extends React.Component {
     this.onVideoTitleClick = this.onVideoTitleClick.bind(this);
     this.onSearchInput = this.onSearchInput.bind(this);
     this.debouncedSearch = _.debounce(props.searchYouTube, 500, {trailing: true});
+    this.updateVideos = this.updateVideos.bind(this);
+  }
+
+  updateVideos (videoList) {
+    this.setState({
+      videoList: videoList,
+      currentVideo: videoList[0],
+    }).bind(this);
   }
 
   componentDidMount () {
-    this.searchYouTube({}, ((videoList) => {
-      this.setState({
-        videoList: videoList,
-        currentVideo: videoList[0],
-      });
-    }).bind(this));
+    this.searchYouTube({}, this.updateVideos);
   }
 
   onSearchInput (searchStr) {
-    this.debouncedSearch({query: searchStr}, ((videoList) => {
-      this.setState({
-        videoList: videoList,
-        currentVideo: videoList[0],
-      });
-    }).bind(this));
+    this.debouncedSearch({query: searchStr}, this.updateVideos);
   }
 
   onVideoTitleClick (video) {
