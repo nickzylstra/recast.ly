@@ -22,7 +22,7 @@
     "babel-plugin-react": "1.0.0",
     "babel-preset-react": "^6.5.0",
     "chai": "^3.5.0",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "sinon": "1.17.3"
   }
 }
